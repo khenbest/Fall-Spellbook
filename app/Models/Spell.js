@@ -5,7 +5,7 @@ export default class Spell {
         this.range = data.range
         this.duration = data.duration
         this.description = data.description || data.desc.join("\n").replace(/â€™/, "'")
-        this.components = data.components
+        this.components = data.componets
         this._id = data._id
         this.apiData = false
 
@@ -29,7 +29,7 @@ export default class Spell {
             <button class="btn btn-danger" onclick="app.controllers.spellController.deleteSpell()">remove</button>
             `
         }
-        return template + '</div>'
+        return template + '<div>'
     }
 
     get EditTemplate() {

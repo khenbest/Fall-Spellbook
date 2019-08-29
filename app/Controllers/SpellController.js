@@ -7,9 +7,9 @@ function _drawApiSpells() {
     let template = '<ul>'
     let spells = _spellService.ApiSpells
     spells.forEach(s => {
-        template += `<li onclick="app.controllers.spellController.select('${s.id}')">${s.name}</li>`
+        template += `<li onclick="app.controllers.spellController.select('${s.id}')">${s.name}<li>`
     })
-    document.getElementById('api-spells').innerHTML = template + '</ul>'
+    document.getElementById('api-spell').innerHTML = template + '</ul>'
 }
 
 function _drawCurrentSpell() {
@@ -35,7 +35,6 @@ function _drawMySpells() {
 export default class SpellController {
     constructor() {
         //NOTE Register all subscribers
-        _spellService.addSubscriber('apiSpells', _drawApiSpells)
         _spellService.addSubscriber('currentSpell', _drawCurrentSpell)
         _spellService.addSubscriber('mySpells', _drawMySpells)
 

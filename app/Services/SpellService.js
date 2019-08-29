@@ -32,7 +32,7 @@ function _setState(propName, data) {
 //Public
 export default class SpellService {
 
-    setActive(id) {
+    setActive(_id) {
         let spell = _state.mySpells.find(s => s._id == id)
         _setState('currentSpell', spell)
     }
@@ -59,10 +59,8 @@ export default class SpellService {
             .then(res => {
                 console.log(res.data);
                 _setState('mySpells', res.data.data)
-
             })
     }
-
     getMySpellById() {
         _sandBoxApi.get(_state.currentSpell._id)
             .then(res => {
@@ -81,10 +79,9 @@ export default class SpellService {
             .then(res => {
                 if (!res.data._id) return
                 console.log(res.data);
-                _setState('currentSpell', res.data)
+                _setState('currentSpell', res.data.data)
             })
     }
-
     addSpell() {
         let mySpell = _state.mySpells.find(s => s.name == _state.currentSpell.name)
         if (mySpell) {
@@ -98,7 +95,6 @@ export default class SpellService {
             })
             .catch(err => console.error(err))
     }
-
     editSpell(update) {
         _sandBoxApi.put(_state.currentSpell._id, update)
             .then(res => {
@@ -106,7 +102,6 @@ export default class SpellService {
                 this.getMySpells()
             })
     }
-
     deleteSpell() {
         _sandBoxApi.delete(_state.currentSpell._id)
             .then(res => {
