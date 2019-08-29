@@ -31,6 +31,13 @@ function _setState(propName, data) {
 
 //Public
 export default class SpellService {
+    addSpell() {
+        _sandBoxApi.post('', _state.currentSpell)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(err => console.error(err))
+    }
     select(id) {
         _apiSpells.get(id)
             .then(res => {
@@ -59,6 +66,7 @@ export default class SpellService {
         _sandBoxApi.get()
             .then(res => {
                 console.log(res.data);
+                _setState('mySpells', res.data)
 
             })
     }

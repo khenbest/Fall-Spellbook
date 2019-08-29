@@ -4,8 +4,9 @@ export default class Spell {
         this.level = data.level
         this.range = data.range
         this.duration = data.duration
-        this.description = data.description || data.desc.join("\n").replace('/â€™/g', "'")
+        this.description = data.description || data.desc.join("\n")
         this.components = data.components
+        this._id = data._id
     }
 
     get Template() {
@@ -15,7 +16,8 @@ export default class Spell {
                     <h5 class="card-title">${this.name}</h5>
                     <p class="card-text">${this.description}</p>
                     <p>${this.level}<br>${this.range}<br>${this.duration}<br>${this.components}</p>
-                </div>
+                </div> 
+                <button class="btn btn-success" onclick="app.controllers.spellController.addSpell()">Learn Spell</button>
             </div>`
     }
 }

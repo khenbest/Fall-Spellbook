@@ -41,4 +41,7 @@ export default class SpellController {
     select(id) {
         _spellService.select(id)
     }
+    addSpell() {
+        _spellService.addSpell()
+    }
 }
