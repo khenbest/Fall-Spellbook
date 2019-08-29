@@ -36,6 +36,9 @@ export default class SpellService {
         _subscribers[propName].push(fn)
     }
 
+    get ApiSpells() {
+        return _state.apiSpells
+    }
     getApiSpells() {
         _apiSpells.get()
             .then(res => {
