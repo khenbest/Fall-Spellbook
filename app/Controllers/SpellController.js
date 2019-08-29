@@ -12,5 +12,6 @@ export default class SpellController {
 
 
         //NOTE Retrieve data
+        _spellService.getApiSpells()
     }
 }

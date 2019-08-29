@@ -1,5 +1,13 @@
 import Spell from "../Models/Spell.js";
 
+let _sandBoxApi = axios.create({
+    baseURL: 'http://bcw-sandbox.herokuapp.com/api/class/spells'
+})
+
+let _apiSpells = axios.create({
+    baseURL: 'http://bcw-sandbox.herokuapp.com/api/spells'
+})
+
 //Private
 let _state = {
     apiSpells: [],
@@ -13,15 +21,6 @@ let _subscribers = {
     currentSpell: [],
     mySpells: []
 }
-let _sandBoxApi = axios.create({
-    baseURL: 'http://bcw-sandbox.herokuapp.com/api/class/spells'
-
-})
-let _apiSpells = axios.create({
-    baseURL: 'http://bcw-sandbox.herokuapp.com/api/spells'
-})
-
-
 
 function _setState(propName, data) {
     //NOTE add the data to the state
@@ -35,5 +34,13 @@ export default class SpellService {
     //NOTE adds the subscriber function to the array based on the property it is watching
     addSubscriber(propName, fn) {
         _subscribers[propName].push(fn)
+    }
+
+    getApiSpells() {
+        _apiSpells.get()
+            .then(res => {
+                _setState('apiSpells', res.data)
+                console.log(res.data);
+            })
     }
 }
