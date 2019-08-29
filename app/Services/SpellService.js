@@ -31,19 +31,16 @@ function _setState(propName, data) {
 
 //Public
 export default class SpellService {
+    setActive(id) {
+        let spell = _state.mySpells.find(s => s._id == id)
+        _setState('currentSpell', spell)
+    }
     addSpell() {
         _sandBoxApi.post('', _state.currentSpell)
             .then(res => {
                 console.log(res.data)
             })
             .catch(err => console.error(err))
-    }
-    select(id) {
-        _apiSpells.get(id)
-            .then(res => {
-                console.log(res.data);
-                _setState('currentSpell', new Spell(res.data))
-            })
     }
     //NOTE adds the subscriber function to the array based on the property it is watching
     addSubscriber(propName, fn) {
@@ -55,7 +52,7 @@ export default class SpellService {
     }
 
     get CurrentSpell() {
-        return _state.currentSpell
+        return new Spell(_state.currentSpell)
     }
 
     get MySpells() {
@@ -66,7 +63,7 @@ export default class SpellService {
         _sandBoxApi.get()
             .then(res => {
                 console.log(res.data);
-                _setState('mySpells', res.data)
+                _setState('mySpells', res.data.data)
 
             })
     }
@@ -76,6 +73,14 @@ export default class SpellService {
             .then(res => {
                 _setState('apiSpells', res.data)
                 console.log(res.data);
+            })
+    }
+    select(id) {
+        _apiSpells.get(id)
+            .then(res => {
+                if (!res.data._id) return
+                console.log(res.data);
+                _setState('currentSpell', new Spell(res.data))
             })
     }
 }

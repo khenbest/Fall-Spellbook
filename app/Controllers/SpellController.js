@@ -20,7 +20,7 @@ function _drawMySpells() {
     let spells = _spellService.MySpells
     let template = '<ul>'
     spells.forEach(s => {
-        template += `<li onclick="app.controllers.spellController.select('${s.id}')">${s.name}</li>`
+        template += `<li onclick="app.controllers.spellController.setActive('${s._id}')">${s.name}</li>`
     })
     document.getElementById('my-spells').innerHTML = template + '</ul>'
 }
@@ -40,6 +40,11 @@ export default class SpellController {
     }
     select(id) {
         _spellService.select(id)
+    }
+
+    setActive(id) {
+        debugger
+        _spellService.setActive(id)
     }
     addSpell() {
         _spellService.addSpell()
