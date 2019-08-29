@@ -46,6 +46,15 @@ export default class SpellService {
     get ApiSpells() {
         return _state.apiSpells
     }
+
+    getMySpells() {
+        _sandBoxApi.get()
+            .then(res => {
+                console.log(res.data);
+
+            })
+    }
+
     getApiSpells() {
         _apiSpells.get()
             .then(res => {
