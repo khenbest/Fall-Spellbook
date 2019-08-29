@@ -31,6 +31,13 @@ function _setState(propName, data) {
 
 //Public
 export default class SpellService {
+    select(id) {
+        _apiSpells.get(id)
+            .then(res => {
+                console.log(res.data);
+
+            })
+    }
     //NOTE adds the subscriber function to the array based on the property it is watching
     addSubscriber(propName, fn) {
         _subscribers[propName].push(fn)

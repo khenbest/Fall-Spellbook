@@ -7,7 +7,7 @@ function _drawApiSpells() {
     let template = '<ul>'
     let spells = _spellService.ApiSpells
     spells.forEach(s => {
-        template += `<li>${s.name}</li>`
+        template += `<li onclick="app.controllers.spellController.select('${s.id}')">${s.name}</li>`
     })
     document.getElementById('api-spells').innerHTML = template + '</ul>'
 }
@@ -21,5 +21,8 @@ export default class SpellController {
 
         //NOTE Retrieve data
         _spellService.getApiSpells()
+    }
+    select(id) {
+        _spellService.select(id)
     }
 }
