@@ -35,13 +35,7 @@ export default class SpellService {
         let spell = _state.mySpells.find(s => s._id == id)
         _setState('currentSpell', spell)
     }
-    addSpell() {
-        _sandBoxApi.post('', _state.currentSpell)
-            .then(res => {
-                console.log(res.data)
-            })
-            .catch(err => console.error(err))
-    }
+
     //NOTE adds the subscriber function to the array based on the property it is watching
     addSubscriber(propName, fn) {
         _subscribers[propName].push(fn)
@@ -80,7 +74,24 @@ export default class SpellService {
             .then(res => {
                 if (!res.data._id) return
                 console.log(res.data);
-                _setState('currentSpell', new Spell(res.data))
+                _setState('currentSpell', res.data)
             })
     }
+    addSpell() {
+        _sandBoxApi.post('', this.CurrentSpell)
+            .then(res => {
+                _setState("currentSpell", res.data.data)
+                this.getMySpells();
+            })
+            .catch(err => console.error(err))
+    }
+
+
+    deleteSpell() {
+        _sandBoxApi.delete(_state.currentSpell._id)
+            .then(res => {
+                this.getMySpells();
+            })
+    }
+
 }

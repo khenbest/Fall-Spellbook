@@ -43,10 +43,13 @@ export default class SpellController {
     }
 
     setActive(id) {
-        debugger
         _spellService.setActive(id)
     }
     addSpell() {
         _spellService.addSpell()
+    }
+    deleteSpell() {
+        _spellService.deleteSpell()
+        document.getElementById('current-spell').innerHTML = ''
     }
 }
