@@ -35,7 +35,7 @@ export default class SpellService {
         _apiSpells.get(id)
             .then(res => {
                 console.log(res.data);
-
+                _setState('currentSpell', new Spell(res.data))
             })
     }
     //NOTE adds the subscriber function to the array based on the property it is watching
@@ -45,6 +45,14 @@ export default class SpellService {
 
     get ApiSpells() {
         return _state.apiSpells
+    }
+
+    get CurrentSpell() {
+        return _state.currentSpell
+    }
+
+    get MySpells() {
+        return _state.mySpells
     }
 
     getMySpells() {

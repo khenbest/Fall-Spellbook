@@ -4,7 +4,7 @@ export default class Spell {
         this.level = data.level
         this.range = data.range
         this.duration = data.duration
-        this.description = data.description || data.desc.join("\n")
+        this.description = data.description || data.desc.join("\n").replace('/â€™/g', "'")
         this.components = data.components
     }
 

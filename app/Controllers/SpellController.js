@@ -12,6 +12,10 @@ function _drawApiSpells() {
     document.getElementById('api-spells').innerHTML = template + '</ul>'
 }
 
+function _drawCurrentSpell() {
+    document.getElementById('current-spell').innerHTML = _spellService.CurrentSpell.Template
+}
+
 function _drawMySpells() {
     let spells = _spellService.MySpells
     let template = '<ul>'
@@ -27,6 +31,8 @@ export default class SpellController {
     constructor() {
         //NOTE Register all subscribers
         _spellService.addSubscriber('apiSpells', _drawApiSpells)
+        _spellService.addSubscriber('currentSpell', _drawCurrentSpell)
+        _spellService.addSubscriber('mySpells', _drawMySpells)
 
         //NOTE Retrieve data
         _spellService.getApiSpells()
