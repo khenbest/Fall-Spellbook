@@ -25,10 +25,25 @@ export default class Spell {
                 <button class="btn btn-success" onclick="app.controllers.spellController.addSpell()">Learn Spell</button>`
         if (!this.apiData) {
             template += `
+            <button class="btn btn-warning" onclick="app.controllers.spellController.showEditSpell()">Edit</button>
             <button class="btn btn-danger" onclick="app.controllers.spellController.deleteSpell()">remove</button>
             `
         }
         return template + '</div>'
+    }
+
+    get EditTemplate() {
+        return `
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">${this.name}</h5>
+                    <form onsubmit="app.controllers.spellController.editSpell(event)">
+                        <textarea id="edit-description" name="description"></textarea>
+                        <button class="btn btn-warning" type="submit">save</button>
+                    </form>
+                </div> 
+            </div>
+            `
     }
 }
 

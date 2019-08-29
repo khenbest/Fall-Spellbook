@@ -16,6 +16,11 @@ function _drawCurrentSpell() {
     document.getElementById('current-spell').innerHTML = _spellService.CurrentSpell.Template
 }
 
+function _drawSpellEdit() {
+    document.getElementById('current-spell').innerHTML = _spellService.CurrentSpell.EditTemplate
+    document.getElementById('edit-description').value = _spellService.CurrentSpell.description
+}
+
 function _drawMySpells() {
     let spells = _spellService.MySpells
     let template = '<ul>'
@@ -47,6 +52,18 @@ export default class SpellController {
     }
     addSpell() {
         _spellService.addSpell()
+    }
+    showEditSpell() {
+        _drawSpellEdit()
+    }
+
+    editSpell(e) {
+        e.preventDefault();
+        let form = e.target
+        let update = {
+            description: form.description.value
+        }
+        _spellService.editSpell(update)
     }
     deleteSpell() {
         _spellService.deleteSpell()

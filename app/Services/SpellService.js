@@ -31,6 +31,7 @@ function _setState(propName, data) {
 
 //Public
 export default class SpellService {
+
     setActive(id) {
         let spell = _state.mySpells.find(s => s._id == id)
         _setState('currentSpell', spell)
@@ -62,6 +63,12 @@ export default class SpellService {
             })
     }
 
+    getMySpellById() {
+        _sandBoxApi.get(_state.currentSpell._id)
+            .then(res => {
+                _setState('currentSpell', res.data.data)
+            })
+    }
     getApiSpells() {
         _apiSpells.get()
             .then(res => {
@@ -77,7 +84,13 @@ export default class SpellService {
                 _setState('currentSpell', res.data)
             })
     }
+
     addSpell() {
+        let mySpell = _state.mySpells.find(s => s.name == _state.currentSpell.name)
+        if (mySpell) {
+            alert('Spell already in book')
+            return
+        }
         _sandBoxApi.post('', this.CurrentSpell)
             .then(res => {
                 _setState("currentSpell", res.data.data)
@@ -86,6 +99,13 @@ export default class SpellService {
             .catch(err => console.error(err))
     }
 
+    editSpell(update) {
+        _sandBoxApi.put(_state.currentSpell._id, update)
+            .then(res => {
+                this.getMySpellById()
+                this.getMySpells()
+            })
+    }
 
     deleteSpell() {
         _sandBoxApi.delete(_state.currentSpell._id)
